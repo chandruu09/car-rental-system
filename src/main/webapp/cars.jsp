@@ -49,7 +49,7 @@
               <h5 class="card-title"><c:out value="${car.brand}"/> <c:out value="${car.model}"/></h5>
               <p class="mb-1"><c:out value="${car.type}"/> &middot; ${car.seats} seats</p>
               <p class="fw-bold mb-3">&#8377;${car.pricePerDay} / day</p>
-              <a href="#" class="btn btn-success w-100 disabled">Book (coming next)</a>
+              <a href="${pageContext.request.contextPath}/book?carId=${car.id}" class="btn btn-success w-100">Book now</a>
             </div>
           </div>
         </div>

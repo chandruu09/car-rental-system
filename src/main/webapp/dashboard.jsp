@@ -19,6 +19,7 @@
   <div class="container mt-4">
     <h3>Welcome, <c:out value="${sessionScope.user.name}"/>!</h3>
    <a href="${pageContext.request.contextPath}/cars" class="btn btn-primary">Browse cars</a>
+   <a href="${pageContext.request.contextPath}/my-bookings" class="btn btn-outline-primary">My bookings</a>
   </div>
 </body>
 </html>

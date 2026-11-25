@@ -101,4 +101,21 @@ public class CarDAO {
         car.setImageUrl(rs.getString("image_url"));
         return car;
     }
+    
+    //Get Car By Id
+    public Car getCarById(int id) {
+        String sql = "SELECT * FROM cars WHERE id = ?";
+        try (Connection con = DBconnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return mapCar(rs);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

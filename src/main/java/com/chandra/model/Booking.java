@@ -10,6 +10,7 @@ public class Booking {
     private Date endDate;
     private double totalAmount;
     private String status;
+    private String carName;
 	public int getId() {
 		return id;
 	}
@@ -51,5 +52,11 @@ public class Booking {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getCarName() {
+		return carName;
+	}
+	public void setCarName(String carName) {
+		this.carName = carName;
 	}
 }
