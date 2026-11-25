@@ -18,7 +18,7 @@
   </nav>
   <div class="container mt-4">
     <h3>Admin panel</h3>
-    <p class="text-muted">Manage cars and bookings here (coming soon).</p>
+   <a href="${pageContext.request.contextPath}/admin/cars" class="btn btn-primary">Manage cars</a>
   </div>
 </body>
 </html>
