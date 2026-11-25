@@ -19,6 +19,7 @@
   <div class="container mt-4">
     <h3>Admin panel</h3>
    <a href="${pageContext.request.contextPath}/admin/cars" class="btn btn-primary">Manage cars</a>
+   <a href="${pageContext.request.contextPath}/admin/bookings" class="btn btn-outline-primary">View bookings</a>
   </div>
 </body>
 </html>

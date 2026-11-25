@@ -92,4 +92,46 @@ public class BookingDAO {
             return false;
         }
     }
+    
+    public List<Booking> getAllBookings() {
+        List<Booking> list = new ArrayList<>();
+        String sql = "SELECT b.*, c.brand, c.model, u.name AS user_name FROM bookings b "
+                   + "JOIN cars c ON b.car_id = c.id "
+                   + "JOIN users u ON b.user_id = u.id ORDER BY b.id DESC";
+        try (Connection con = DBconnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Booking b = new Booking();
+                b.setId(rs.getInt("id"));
+                b.setUserId(rs.getInt("user_id"));
+                b.setCarId(rs.getInt("car_id"));
+                b.setStartDate(rs.getDate("start_date"));
+                b.setEndDate(rs.getDate("end_date"));
+                b.setTotalAmount(rs.getDouble("total_amount"));
+                b.setStatus(rs.getString("status"));
+                b.setCarName(rs.getString("brand") + " " + rs.getString("model"));
+                b.setUserName(rs.getString("user_name"));
+                list.add(b);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    // Changes the status only if the booking is currently in 'requiredCurrent'
+    public boolean updateStatus(int bookingId, String newStatus, String requiredCurrent) {
+        String sql = "UPDATE bookings SET status = ? WHERE id = ? AND status = ?";
+        try (Connection con = DBconnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, newStatus);
+            ps.setInt(2, bookingId);
+            ps.setString(3, requiredCurrent);
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

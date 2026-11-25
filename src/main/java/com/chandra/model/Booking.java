@@ -11,6 +11,8 @@ public class Booking {
     private double totalAmount;
     private String status;
     private String carName;
+    private String userName;
+    
 	public int getId() {
 		return id;
 	}
@@ -58,5 +60,11 @@ public class Booking {
 	}
 	public void setCarName(String carName) {
 		this.carName = carName;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 }
