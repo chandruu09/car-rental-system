@@ -18,7 +18,7 @@
   </nav>
   <div class="container mt-4">
     <h3>Welcome, <c:out value="${sessionScope.user.name}"/>!</h3>
-    <p class="text-muted">Browse and book cars here (coming next).</p>
+   <a href="${pageContext.request.contextPath}/cars" class="btn btn-primary">Browse cars</a>
   </div>
 </body>
 </html>

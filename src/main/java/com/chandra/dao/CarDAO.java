@@ -12,7 +12,7 @@ import com.chandra.model.Car;
 import com.chandra.util.DBconnection;
 
 public class CarDAO {
-
+	// Add cars
     public boolean addCar(Car car) {
         String sql = "INSERT INTO cars (brand, model, type, seats, price_per_day, status, image_url) "
                    + "VALUES (?, ?, ?, ?, ?, 'AVAILABLE', ?)";
@@ -30,7 +30,7 @@ public class CarDAO {
             return false;
         }
     }
-
+    // get Car details
     public List<Car> getAllCars() {
         List<Car> cars = new ArrayList<>();
         String sql = "SELECT * FROM cars ORDER BY id DESC";
@@ -45,7 +45,38 @@ public class CarDAO {
         }
         return cars;
     }
+    //Search Cars
+    public List<Car> searchCars(String type, Double maxPrice) {
+        List<Car> cars = new ArrayList<>();
+        StringBuilder sql = new StringBuilder("SELECT * FROM cars WHERE status <> 'MAINTENANCE'");
+        List<Object> params = new ArrayList<>();
 
+        if (type != null && !type.isEmpty()) {
+            sql.append(" AND type = ?");
+            params.add(type);
+        }
+        if (maxPrice != null) {
+            sql.append(" AND price_per_day <= ?");
+            params.add(maxPrice);
+        }
+        sql.append(" ORDER BY price_per_day ASC");
+
+        try (Connection con = DBconnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql.toString())) {
+            for (int i = 0; i < params.size(); i++) {
+                ps.setObject(i + 1, params.get(i));
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    cars.add(mapCar(rs));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return cars;
+    }
+    // delete Cars
     public boolean deleteCar(int id) {
         String sql = "DELETE FROM cars WHERE id = ?";
         try (Connection con = DBconnection.getConnection();
