@@ -53,7 +53,7 @@ public class RegisterServlet extends HttpServlet {
         user.setRole("USER");
 
         if (userDAO.registerUser(user)) {
-            response.sendRedirect("register.jsp?success=1");
+            response.sendRedirect(request.getContextPath() + "/login.jsp?registered=1");
         } else {
             request.setAttribute("error", "Something went wrong. Please try again.");
             request.getRequestDispatcher("register.jsp").forward(request, response);

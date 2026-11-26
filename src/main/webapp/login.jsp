@@ -13,6 +13,10 @@
     <div class="card shadow-sm">
       <div class="card-body p-4">
         <h3 class="mb-3 text-center">Login</h3>
+		
+		<c:if test="${param.registered == '1'}">
+		  <div class="alert alert-success">Registration successful! Please log in.</div>
+		</c:if>
 
         <c:if test="${not empty error}">
           <div class="alert alert-danger"><c:out value="${error}"/></div>

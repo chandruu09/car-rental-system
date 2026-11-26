@@ -40,11 +40,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", user);
             session.setMaxInactiveInterval(30 * 60); // 30 minutes
 
-            if ("ADMIN".equals(user.getRole())) {
-                response.sendRedirect(request.getContextPath() + "/admin-dashboard.jsp");
-            } else {
-                response.sendRedirect(request.getContextPath() + "/dashboard.jsp");
-            }
+            response.sendRedirect(request.getContextPath() + "/");
         } else {
             request.setAttribute("error", "Invalid email or password.");
             request.getRequestDispatcher("login.jsp").forward(request, response);
