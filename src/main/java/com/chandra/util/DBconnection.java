@@ -10,7 +10,7 @@ public class DBconnection {
 
     private static final String URL = getEnv("DB_URL", "jdbc:postgresql://localhost:5432/car_rental");
     private static final String USER = getEnv("DB_USER", "postgres");
-    private static final String PASSWORD = getEnv("DB_PASSWORD", "your_local_password");
+    private static final String PASSWORD = getEnv("DB_PASSWORD", "23");
 
     private static String getEnv(String key, String fallback) {
         String value = System.getenv(key);
